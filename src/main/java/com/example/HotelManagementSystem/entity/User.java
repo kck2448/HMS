@@ -3,8 +3,12 @@ package com.example.HotelManagementSystem.entity;
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.ValueGenerationType;
 
+import com.example.HotelManagementSystem.Enum.UserRole;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +34,9 @@ public class User {
 	@Column(name = "user_phone")
 	private String userPhone;
 	
-	@Column(name = "user_role")
-	private String userRole;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private UserRole userRole;
 	
 	@Column(name = "user_address")
 	private String userAddress;
@@ -46,7 +51,7 @@ public class User {
 	
 
 	public User(Integer userId, String userName, String userEmail, String userPassword, String userPhone,
-			String userRole, String userAddress, String createdAt) {
+			UserRole userRole, String userAddress, String createdAt) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -99,11 +104,11 @@ public class User {
 		this.userPhone = userPhone;
 	}
 
-	public String getUserRole() {
+	public UserRole getUserRole() {
 		return userRole;
 	}
 
-	public void setUserRole(String userRole) {
+	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
 
